@@ -1,13 +1,23 @@
-import { useGetAllProductsQuery } from "../features/apiSlice";
+import { useGetAllProductsQuery, useGetProductQuery } from "../features/apiSlice";
 
 const Data = () => {
-  const { data } = useGetAllProductsQuery();
+  const { data, isError, error, isLoading } = useGetAllProductsQuery();
+  // const data = useGetProductQuery('apple');
 
-  console.log(data);
+  if(isLoading) return <h2>Loading...</h2>
 
   return (
     <div style={{color: '#fff'}}>
         Data:
+        <ul>
+        {
+          data.products.map(ele => (
+            <li key={ele.id}>
+              {ele.title}
+            </li>
+          ))
+        }
+        </ul>
     </div>
   )
 }
